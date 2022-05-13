@@ -1,6 +1,6 @@
 # Files management tools
 
-Handy and compact (because it's more fun) functions made for simple operations on all files and folders of a directory. Made for terminal interpreter use.
+Handy and compact (because it's more fun) functions made for simple operations on all files and subdirs of a directory. Made for interpreter use.
 
 ### Requirements
 * `humanize` package
