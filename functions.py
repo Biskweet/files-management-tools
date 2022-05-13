@@ -15,10 +15,10 @@ def dir_size(directory):
 # humanize.filesize.naturalsize(dir_size("."))
 
 
-# --- Get all extensions ---
-def get_extensions(directory):
+# --- Display all extensions in the directory and subdirs ---
+def get_all_extensions(directory):
 	files, folders = get_dir_content(directory)
-	return list(set([os.path.splitext(directory + "/" + file)[1].lower() for file in files] + sum([get_extensions(directory + "/" + dir) for dir in folders], start=[])))
+	return list(set([os.path.splitext(directory + "/" + file)[1].lower() for file in files] + sum([get_all_extensions(directory + "/" + dir) for dir in folders], start=[])))
 
 # humanize.filesize.naturalsize(dir_size("."))
 
@@ -30,12 +30,12 @@ def find_extension_occ(directory, extension):
 
 
 # --- Batch rename (replaces spaces with underscores) ---
-def renamer(directory):
+def renamer(directory, previous_string, new_string):
     files, folders = get_dir_content(directory)
     for file in files:
-        os.rename(directory + '/' + file, directory + '/' + file.replace(' ', '_'))
+        os.rename(directory + '/' + file, directory + '/' + file.replace(previous_string, new_string))
     for folder in folders:
-        new_folder_name = folder.replace(' ', '_')
+        new_folder_name = folder.replace(previous_string, new_string)
         try:
             os.rename(directory + '/' + folder, directory + '/' + new_folder_name)
             renamer(directory + '/' + new_folder_name)
